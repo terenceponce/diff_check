@@ -1,6 +1,7 @@
 # Diff Check
 
 [![ci](https://github.com/terenceponce/diff_check/actions/workflows/ci.yml/badge.svg)](https://github.com/terenceponce/diff_check/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/terenceponce/diff_check/graph/badge.svg?token=F692aysHWW)](https://codecov.io/gh/terenceponce/diff_check)
 
 ## Quick Start
 
