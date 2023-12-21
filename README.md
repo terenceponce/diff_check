@@ -1,5 +1,7 @@
 # Diff Check
 
+[![ci](https://github.com/terenceponce/diff_check/actions/workflows/ci.yml/badge.svg)](https://github.com/terenceponce/diff_check/actions/workflows/ci.yml)
+
 ## Quick Start
 
 ```
