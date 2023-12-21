@@ -8,6 +8,7 @@ defmodule DiffCheck.MixProject do
       elixir: "1.15.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      aliases: aliases(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -29,7 +30,15 @@ defmodule DiffCheck.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:credo, "1.7.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "0.18.0", only: :test}
+    ]
+  end
+
+  defp aliases do
+    [
+      lint: ["format", "credo"],
+      "lint.ci": ["format --check-formatted", "credo"]
     ]
   end
 end
