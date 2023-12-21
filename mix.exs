@@ -16,6 +16,13 @@ defmodule DiffCheck.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test,
         "coveralls.cobertura": :test
+      ],
+      dialyzer: [
+        plt_add_apps: [
+          :ex_unit
+        ],
+        plt_file: {:no_warn, "priv/plts/project.plt"},
+        list_unused_filters: true
       ]
     ]
   end
@@ -31,6 +38,7 @@ defmodule DiffCheck.MixProject do
   defp deps do
     [
       {:credo, "1.7.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "1.4.2", only: [:dev, :test], runtime: false},
       {:excoveralls, "0.18.0", only: :test}
     ]
   end
