@@ -1,0 +1,28 @@
+[
+  {
+    "http_version": "HTTP/1.1",
+    "request": {
+      "body": null,
+      "headers": [
+        {
+          "name": "Cache-Control",
+          "value": "no-cache"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Connection",
+          "value": "keep-alive"
+        }
+      ],
+      "method": "GET",
+      "url": "https://thebank.engineering/api/apps/A3254415/configuration?osVersion=16.5appType=iPhone&appVersion=13.4.0"
+    }
+  }
+]

@@ -3,10 +3,14 @@ defmodule DiffCheckTest do
   doctest DiffCheck
 
   test "works with valid arguments" do
-    file1 = Path.expand("support/fixtures/13.3.7_.json", __DIR__)
-    file2 = Path.expand("support/fixtures/13.4.0_.json", __DIR__)
+    file1 = Path.expand("support/fixtures/test_response_1.json", __DIR__)
+    file2 = Path.expand("support/fixtures/test_response_2.json", __DIR__)
 
     assert DiffCheck.main([file1, file2]) == :ok
+  end
+
+  test "fails with non-existent files" do
+    assert DiffCheck.main(["foo", "bar"]) == {:error, "One or both files do not exist"}
   end
 
   test "fails with incomplete arguments" do

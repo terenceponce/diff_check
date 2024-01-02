@@ -1,0 +1,20 @@
+[
+  {
+    "http_version": "HTTP/1.1",
+    "request": {
+      "body": null,
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "*/*"
+        },
+        {
+          "name": "Connection",
+          "value": "keep-alive"
+        }
+      ],
+      "method": "GET",
+      "url": "https://status.thebank.engineering/status.json?downtimeTimestamp=1691577508.930853"
+    }
+  }
+]
