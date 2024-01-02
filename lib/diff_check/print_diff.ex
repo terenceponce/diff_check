@@ -38,6 +38,13 @@ defmodule DiffCheck.PrintDiff do
   end
 
   defp diff_line(prefix, list, index, output) do
-    [prefix <> " " <> Enum.at(list, index) | output]
+    color =
+      case prefix do
+        "-" -> IO.ANSI.red()
+        "+" -> IO.ANSI.green()
+        _ -> IO.ANSI.reset()
+      end
+
+    [color <> prefix <> " " <> Enum.at(list, index) | output]
   end
 end

@@ -46,14 +46,14 @@ defmodule DiffCheck.PrintDiffTest do
     }
 
     expected_result = [
-      "- A",
-      "- B",
-      "- C",
-      "  B",
-      "  D",
-      "+ C",
-      "  A",
-      "  B"
+      "#{red()}- A",
+      "#{red()}- B",
+      "#{red()}- C",
+      "#{default()}  B",
+      "#{default()}  D",
+      "#{green()}+ C",
+      "#{default()}  A",
+      "#{default()}  B"
     ]
 
     assert PrintDiff.call(matrix, list1, list2) == expected_result
@@ -102,14 +102,14 @@ defmodule DiffCheck.PrintDiffTest do
     }
 
     expected_result = [
-      "+ A",
-      "  B",
-      "- D",
-      "  C",
-      "+ B",
-      "+ D",
-      "  A",
-      "  B"
+      "#{green()}+ A",
+      "#{default()}  B",
+      "#{red()}- D",
+      "#{default()}  C",
+      "#{green()}+ B",
+      "#{green()}+ D",
+      "#{default()}  A",
+      "#{default()}  B"
     ]
 
     assert PrintDiff.call(matrix, list1, list2) == expected_result
@@ -732,37 +732,37 @@ defmodule DiffCheck.PrintDiffTest do
     }
 
     expected_result = [
-      "  [",
-      "    {",
-      "      \"http_version\": \"HTTP/1.1\",",
-      "      \"request\": {",
-      "        \"body\": null,",
-      "        \"headers\": [",
-      "+         {",
-      "+           \"name\": \"Cache-Control\",",
-      "+           \"value\": \"no-cache\"",
-      "+         },",
-      "+         {",
-      "+           \"name\": \"Content-Type\",",
-      "+           \"value\": \"application/json\"",
-      "+         },",
-      "          {",
-      "            \"name\": \"Accept\",",
-      "-           \"value\": \"*/*\"",
-      "+           \"value\": \"application/json\"",
-      "          },",
-      "          {",
-      "            \"name\": \"Connection\",",
-      "            \"value\": \"keep-alive\"",
-      "          }",
-      "        ],",
-      "        \"method\": \"GET\",",
-      "-       \"url\": \"https://status.thebank.engineering/status.json?downtimeTimestamp=1691577508.930853\"",
-      "+       \"url\": \"https://thebank.engineering/api/apps/A3254415/configuration?osVersion=16.5appType=iPhone&appVersion=13.4.0\"",
-      "      }",
-      "    }",
-      "  ]",
-      "  "
+      "#{default()}  [",
+      "#{default()}    {",
+      "#{default()}      \"http_version\": \"HTTP/1.1\",",
+      "#{default()}      \"request\": {",
+      "#{default()}        \"body\": null,",
+      "#{default()}        \"headers\": [",
+      "#{green()}+         {",
+      "#{green()}+           \"name\": \"Cache-Control\",",
+      "#{green()}+           \"value\": \"no-cache\"",
+      "#{green()}+         },",
+      "#{green()}+         {",
+      "#{green()}+           \"name\": \"Content-Type\",",
+      "#{green()}+           \"value\": \"application/json\"",
+      "#{green()}+         },",
+      "#{default()}          {",
+      "#{default()}            \"name\": \"Accept\",",
+      "#{red()}-           \"value\": \"*/*\"",
+      "#{green()}+           \"value\": \"application/json\"",
+      "#{default()}          },",
+      "#{default()}          {",
+      "#{default()}            \"name\": \"Connection\",",
+      "#{default()}            \"value\": \"keep-alive\"",
+      "#{default()}          }",
+      "#{default()}        ],",
+      "#{default()}        \"method\": \"GET\",",
+      "#{red()}-       \"url\": \"https://status.thebank.engineering/status.json?downtimeTimestamp=1691577508.930853\"",
+      "#{green()}+       \"url\": \"https://thebank.engineering/api/apps/A3254415/configuration?osVersion=16.5appType=iPhone&appVersion=13.4.0\"",
+      "#{default()}      }",
+      "#{default()}    }",
+      "#{default()}  ]",
+      "#{default()}  "
     ]
 
     assert PrintDiff.call(matrix, file1, file2) == expected_result
@@ -774,4 +774,8 @@ defmodule DiffCheck.PrintDiffTest do
     |> File.read!()
     |> String.split("\n")
   end
+
+  defp default, do: IO.ANSI.reset()
+  defp green, do: IO.ANSI.green()
+  defp red, do: IO.ANSI.red()
 end
