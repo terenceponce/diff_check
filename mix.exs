@@ -9,6 +9,7 @@ defmodule DiffCheck.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
+      escript: escript_config(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -47,6 +48,12 @@ defmodule DiffCheck.MixProject do
     [
       lint: ["format", "credo"],
       "lint.ci": ["format --check-formatted", "credo"]
+    ]
+  end
+
+  defp escript_config do
+    [
+      main_module: DiffCheck
     ]
   end
 end

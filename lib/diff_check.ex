@@ -1,18 +1,38 @@
 defmodule DiffCheck do
-  @moduledoc """
-  Documentation for `DiffCheck`.
-  """
+  alias DiffCheck.BuildMatrix
+  alias DiffCheck.PrintDiff
 
-  @doc """
-  Hello world.
+  def main(args) do
+    case validate_args(args) do
+      :ok ->
+        [file1_path, file2_path] = args
 
-  ## Examples
+        file1 = File.read!(file1_path) |> String.split("\n")
+        file2 = File.read!(file2_path) |> String.split("\n")
 
-      iex> DiffCheck.hello()
-      :world
+        file1
+        |> BuildMatrix.call(file2)
+        |> PrintDiff.call(file1, file2)
+        |> Enum.join("\n")
+        |> IO.write()
 
-  """
-  def hello do
-    :world
+      {:error, message} ->
+        IO.puts("Error: #{message}")
+        {:error, message}
+    end
+  end
+
+  defp validate_args(args) do
+    case args do
+      [file1, file2] ->
+        if File.exists?(file1) and File.exists?(file2) do
+          :ok
+        else
+          {:error, "One or both files do not exist"}
+        end
+
+      _ ->
+        {:error, "You must provide exactly two arguments"}
+    end
   end
 end
