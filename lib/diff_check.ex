@@ -1,14 +1,28 @@
 defmodule DiffCheck do
+  @moduledoc """
+  DiffCheck is a command-line tool that compares two files and prints the
+  differences between them.
+
+  The way this works is that it builds a 2D matrix of the two files by
+  computing for the longest subsequence between each files. It then prints
+  the differences between the two files by backtracking through the matrix.
+
+  The LCS implementation used is based on this Wikipedia article:
+
+  https://en.wikipedia.org/wiki/Longest_common_subsequence
+  """
+
   alias DiffCheck.BuildMatrix
   alias DiffCheck.PrintDiff
 
+  @spec main(args :: [String.t()], disable_printing :: boolean) :: :ok | {:error, String.t()}
   def main(args, disable_printing \\ false) do
     case validate_args(args) do
       :ok ->
         [file1_path, file2_path] = args
 
-        file1 = File.read!(file1_path) |> String.split("\n")
-        file2 = File.read!(file2_path) |> String.split("\n")
+        file1 = stringify_file(file1_path)
+        file2 = stringify_file(file2_path)
 
         file1
         |> BuildMatrix.call(file2)
@@ -45,5 +59,11 @@ defmodule DiffCheck do
     # coveralls-ignore-stop
 
     :ok
+  end
+
+  defp stringify_file(file_path) do
+    file_path
+    |> File.read!()
+    |> String.split("\n")
   end
 end
