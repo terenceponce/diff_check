@@ -28,9 +28,7 @@
         excluded: [
           ~r"/_build/",
           ~r"/deps/",
-          ~r"/lib/diff_check.ex",
-          ~r"/test/support",
-          ~r"/test/diff_check_test.exs"
+          ~r"/test/support"
         ]
       },
       #

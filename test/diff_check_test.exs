@@ -1,6 +1,5 @@
 defmodule DiffCheckTest do
-  use ExUnit.Case
-  doctest DiffCheck
+  use ExUnit.Case, async: true
 
   test "works with valid arguments" do
     file1 = Path.expand("support/fixtures/test_response_1.json", __DIR__)
