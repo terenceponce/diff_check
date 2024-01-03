@@ -2,7 +2,7 @@ defmodule DiffCheck do
   alias DiffCheck.BuildMatrix
   alias DiffCheck.PrintDiff
 
-  def main(args) do
+  def main(args, disable_printing \\ false) do
     case validate_args(args) do
       :ok ->
         [file1_path, file2_path] = args
@@ -14,10 +14,10 @@ defmodule DiffCheck do
         |> BuildMatrix.call(file2)
         |> PrintDiff.call(file1, file2)
         |> Enum.join("\n")
-        |> IO.write()
+        |> print_to_io(disable_printing)
 
       {:error, message} ->
-        IO.puts("Error: #{message}")
+        print_to_io("Error: #{message}", disable_printing)
         {:error, message}
     end
   end
@@ -34,5 +34,16 @@ defmodule DiffCheck do
       _ ->
         {:error, "You must provide exactly two arguments"}
     end
+  end
+
+  defp print_to_io(message, disable_printing) do
+    # coveralls-ignore-start
+    unless disable_printing do
+      IO.write(message)
+    end
+
+    # coveralls-ignore-stop
+
+    :ok
   end
 end
