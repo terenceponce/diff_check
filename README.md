@@ -3,6 +3,7 @@
 [![ci](https://github.com/terenceponce/diff_check/actions/workflows/ci.yml/badge.svg)](https://github.com/terenceponce/diff_check/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/terenceponce/diff_check/graph/badge.svg?token=F692aysHWW)](https://codecov.io/gh/terenceponce/diff_check)
 
+[![asciicast](https://asciinema.org/a/XEfI7MRXkzP26bptADLvR4Gz8.svg)](https://asciinema.org/a/XEfI7MRXkzP26bptADLvR4Gz8)
 
 ## Overview
 
